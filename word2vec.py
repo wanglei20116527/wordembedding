@@ -152,7 +152,7 @@ def wordEmbedding(datas):
             sentence.append(tmpWord)
         sentences.append(sentence)
     newModel = gensim.models.Word2Vec(sentences, min_count=1, size=300)
-    model = gensim.models.KeyedVectors.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
+    model = gensim.models.KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
 
     for data in datas:
         tWord = data['word']

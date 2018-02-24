@@ -1,1 +1,0 @@
-print('wanglei is cool')
