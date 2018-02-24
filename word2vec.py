@@ -249,6 +249,9 @@ def wordEmbedding(datas):
             nextVects.reverse()
         data['nextVects'] = nextVects
         tDatas.append(data)
+    
+    del model
+    del newModel
     return tDatas
 
 def paddingWordEmbedding(datas):
