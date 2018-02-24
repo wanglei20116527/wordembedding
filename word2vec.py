@@ -321,13 +321,13 @@ def outputTSV(datas, filename='./wordembedding.tsv'):
     fo.write(ret)
     fo.close()
 
-def outputWordEmbeddingMeta(datas):
+def outputWordEmbeddingMeta(datas, filename='./wordembedding_meta.tsv'):
     ret = ''
     for i, data in enumerate(datas):
         if i != 0:
             ret = ret + os.linesep
         ret = ret + data
-    fo = open('./wordembedding_meta.tsv', 'w+')
+    fo = open(filename, 'w+')
     fo.write(ret)
     fo.close()
 
@@ -416,6 +416,8 @@ def main():
     session = tf.InteractiveSession()
     session.run(init)
 
+    fileCount = 0
+
     trainDatas = getTrainDatas(datas['arrDatas'],TRAIN_BATCH_SIZE)
     for i in range(MAX_EPOCH):
         print('#################### new epoch:', i)
@@ -466,10 +468,11 @@ def main():
                 wordEmbedding[tmpWord] = tmpNewWordEmbedding[iii]
                 lowDimenWordEmbedding[tmpWord] = tmpLowDimenWordEmbedding[iii]
             
-            outputTSV(outputRet, 'output.tsv')
-            outputTSV(wordEmbedding.values(), './wordembedding.tsv')
-            outputTSV(lowDimenWordEmbedding.values(), './low-dimen-wordembedding.tsv')
-            outputWordEmbeddingMeta(wordEmbedding.keys())
+            fileCount = fileCount + 1
+            outputTSV(outputRet, 'output' + str(fileCount) + '.tsv')
+            outputTSV(wordEmbedding.values(), './wordembedding' + str(fileCount) + '.tsv')
+            outputTSV(lowDimenWordEmbedding.values(), './low-dimen-wordembedding' + str(fileCount) + '.tsv')
+            outputWordEmbeddingMeta(wordEmbedding.keys(), './wordembedding_meta' + str(fileCount) + '.tsv')
         
         # tmpNewWordEmbedding = []
         # tmpLowDimenWordEmbedding = []
