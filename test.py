@@ -1,0 +1,1 @@
+print('wanglei is cool and houna is cute')
