@@ -156,7 +156,7 @@ def wordEmbedding(datas):
 
     for data in datas:
         tWord = data['word']
-        if not tWord in model.wv:
+        if not tWord in model:
             continue
 
         prevVects = None
@@ -167,40 +167,40 @@ def wordEmbedding(datas):
                 tmpWord = tmpWord.strip()
                 if tmpWord == '':
                     continue
-                if tmpWord in model.wv:
-                    prevVects.append(model.wv[tmpWord].tolist())
+                if tmpWord in model:
+                    prevVects.append(model[tmpWord].tolist())
                 elif tmpWord in WORDMAPPING:
-                    prevVects.append(model.wv[WORDMAPPING[tmpWord]].tolist())
+                    prevVects.append(model[WORDMAPPING[tmpWord]].tolist())
                 elif tmpWord.endswith("'s"):
                     tmpWord = tmpWord.replace("'s", '')
-                    if tmpWord in model.wv:
-                        prevVects.append(model.wv[tmpWord].tolist())
+                    if tmpWord in model:
+                        prevVects.append(model[tmpWord].tolist())
                     else:
                         count += 1
                         # print(tmpWord, count, 1)
-                        prevVects.append(newModel.wv[tmpWord + "'s"].tolist())
+                        prevVects.append(newModel[tmpWord + "'s"].tolist())
                 elif tmpWord.startswith("`"):
                     tmpWord = tmpWord.replace("`", '')
-                    if tmpWord in model.wv:
-                        prevVects.append(model.wv[tmpWord].tolist())
+                    if tmpWord in model:
+                        prevVects.append(model[tmpWord].tolist())
                     else:
                         count += 1
                         # print(tmpWord, count, 2.1)
-                        prevVects.append(newModel.wv["`" + tmpWord].tolist())
+                        prevVects.append(newModel["`" + tmpWord].tolist())
                 elif tmpWord.endswith("'"):
                     tmpWord = tmpWord.replace("'", '')
-                    if tmpWord in model.wv:
-                        prevVects.append(model.wv[tmpWord].tolist())
+                    if tmpWord in model:
+                        prevVects.append(model[tmpWord].tolist())
                     else:
                         count += 1
                         # print(tmpWord, count, 2.2)
-                        prevVects.append(newModel.wv[tmpWord + "'"].tolist())
+                        prevVects.append(newModel[tmpWord + "'"].tolist())
                 elif tmpWord.isdigit():
-                    prevVects.append(model.wv['one'].tolist())
+                    prevVects.append(model['one'].tolist())
                 else:
                     count += 1
                     # print(tmpWord, count, 3)
-                    prevVects.append(newModel.wv[tmpWord].tolist())
+                    prevVects.append(newModel[tmpWord].tolist())
         data['prevVects'] = prevVects  
         
         nextVects = None
@@ -211,40 +211,40 @@ def wordEmbedding(datas):
                 tmpWord = tmpWord.strip()
                 if tmpWord == '':
                     continue
-                if tmpWord in model.wv:
-                    nextVects.append(model.wv[tmpWord].tolist())
+                if tmpWord in model:
+                    nextVects.append(model[tmpWord].tolist())
                 elif tmpWord in WORDMAPPING:
-                    nextVects.append(model.wv[WORDMAPPING[tmpWord]].tolist())
+                    nextVects.append(model[WORDMAPPING[tmpWord]].tolist())
                 elif tmpWord.endswith("'s"):
                     tmpWord = tmpWord.replace("'s", '')
-                    if tmpWord in model.wv:
-                        nextVects.append(model.wv[tmpWord].tolist())
+                    if tmpWord in model:
+                        nextVects.append(model[tmpWord].tolist())
                     else:
                         count += 1
                         # print(tmpWord, count, 1)
-                        nextVects.append(newModel.wv[tmpWord + "'s"].tolist())
+                        nextVects.append(newModel[tmpWord + "'s"].tolist())
                 elif tmpWord.startswith("`"):
                     tmpWord = tmpWord.replace("`", '')
-                    if tmpWord in model.wv:
-                        nextVects.append(model.wv[tmpWord].tolist())
+                    if tmpWord in model:
+                        nextVects.append(model[tmpWord].tolist())
                     else:
                         count += 1
                         # print(tmpWord, count, 2.1)
-                        nextVects.append(newModel.wv["`" + tmpWord].tolist())
+                        nextVects.append(newModel["`" + tmpWord].tolist())
                 elif tmpWord.endswith("'"):
                     tmpWord = tmpWord.replace("'", '')
-                    if tmpWord in model.wv:
-                        nextVects.append(model.wv[tmpWord].tolist())
+                    if tmpWord in model:
+                        nextVects.append(model[tmpWord].tolist())
                     else:
                         count += 1
                         # print(tmpWord, count, 2.2)
-                        nextVects.append(newModel.wv[tmpWord + "'"].tolist())
+                        nextVects.append(newModel[tmpWord + "'"].tolist())
                 elif tmpWord.isdigit():
-                    nextVects.append(model.wv['one'].tolist())
+                    nextVects.append(model['one'].tolist())
                 else:
                     count += 1
                     # print(tmpWord, count, 3)
-                    nextVects.append(newModel.wv[tmpWord].tolist())
+                    nextVects.append(newModel[tmpWord].tolist())
         if nextVects != None:
             nextVects.reverse()
         data['nextVects'] = nextVects
